@@ -9,9 +9,18 @@ body {
 }
 .wrapper{
     width: 100%;
-    min-height: 100vh;
+    max-height: 100vh;
     display: flex;
     background: linear-gradient(28deg, rgba(2,0,36,1) 0%, rgba(51,114,190,1) 0%, rgba(94,8,112,1) 0%, rgba(90,7,101,1) 12%, rgba(105,9,121,1) 38%, rgba(90,38,140,1) 47%, rgba(75,68,160,1) 56%, rgba(65,88,173,1) 62%, rgba(0,212,255,1) 100%);
+}
+canvas{
+	display: block;
+	vertical-align: bottom;
+    max-height: 100vh;
+}
+
+#particles-js{
+	height: 100%;
 }
 .profile-card{
     width: 100%;
@@ -21,6 +30,10 @@ body {
     margin: auto;
     box-shadow: 0px 8px 60px -10px rgba(13,28,39,0.6);
     border-radius: 12px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 .profile-card-img{
     width: 150px;
@@ -49,6 +62,17 @@ body {
 .profile-card-info .name{
     color:rgb(108, 68, 252);
     font-size: 20px;
+}
+#toggleButton {
+    margin-right: 2%;
+    cursor: pointer;
+}
+.music {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-top: 5%;
+    margin-left: 8%;
 }
 .profile-card-social{
     margin-top: 25px;
@@ -179,4 +203,20 @@ ul {
         #FBBC04,
         #34A853
     );
+}
+
+.content-music .container { 
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.content-music .lyrics { 
+    width: 100%;
+    transition: bottom 0.5s ease-in-out, opacity 0.5s;
+    opacity: 0;
+}
+.content-music .active { 
+    bottom: 0;
+    opacity: 1;
 }
