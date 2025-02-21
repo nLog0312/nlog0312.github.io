@@ -62,7 +62,12 @@ function uploadStory() {
 
     fetch("https://wedding-nlog0312.runasp.net/api/admin/insert-admin-story", requestOptions)
     .then((response) => response.text())
-    .then((result) => alert("Tải lên thành công!"))
+    .then((result) => {
+        imageUrl = '';
+        descriptionInput.value = '';
+        APIKeyInput.value = '';
+        alert("Tải lên thành công!")
+    })
     .catch((error) => {
         console.error("Lỗi khi tải lên:", error);
         alert("Tải lên thất bại!");
