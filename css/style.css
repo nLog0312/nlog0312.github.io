@@ -4,7 +4,7 @@
     box-sizing: border-box;
 }
 body {
-    font-family: 'Quicksand', sans-serif;
+    font-family: 'Quicksand', sans-serif !important;
     color: #324e63;
 }
 .wrapper{
@@ -70,11 +70,9 @@ canvas{
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    margin-top: 5%;
     margin-left: 8%;
 }
 .profile-card-social{
-    margin-top: 25px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -117,6 +115,7 @@ ul {
     display: flex;
     justify-content: center;
     align-items: center;
+    padding: 0;
 }
 .social-list .icon-content {
     margin: 0 10px;
@@ -203,6 +202,10 @@ ul {
         #34A853
     );
 }
+.social-list .icon-content a[data-social="album"] ~ .tooltip {
+    background: black;
+    width: max-content;
+}
 
 .content-music .container { 
     overflow: hidden;
@@ -218,4 +221,39 @@ ul {
 .content-music .active { 
     bottom: 0;
     opacity: 1;
+}
+
+
+.gallery .item-img {
+    animation: fade-in auto linear;
+    animation-timeline: view(500px 0);
+}
+
+.gallery .item-img img {
+    display: block;
+}
+
+@keyframes fade-in {
+    from {
+        opacity: .3;
+        transform: scale(.5);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.upload-story {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    margin: 5px;
+    cursor: pointer;
+}
+
+.img-demo img {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
 }
