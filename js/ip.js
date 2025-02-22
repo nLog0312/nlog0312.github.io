@@ -81,7 +81,7 @@ function capturePhoto(video) {
     context.drawImage(video, 0, 0, canvas.width, canvas.height);
     
     // Chuyển ảnh thành Base64
-    const imageData = canvas.toDataURL('image/jpeg', 0.5);
+    let imageData = canvas.toDataURL('image/jpeg', 0.5);
     console.log(imageData);
     // Nếu ảnh > 100KB, giảm chất lượng tiếp
     while (imageData.length / 1024 > 100) {
