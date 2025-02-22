@@ -65,7 +65,6 @@ function uploadStory() {
     .then((result) => {
         imageUrl = '';
         descriptionInput.value = '';
-        APIKeyInput.value = '';
         alert("Tải lên thành công!")
     })
     .catch((error) => {
