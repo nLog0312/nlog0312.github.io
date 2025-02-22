@@ -1,8 +1,16 @@
 // Upload
 let imageUrl = '';
+const fileInput = document.getElementById("inputImage");
+
+fileInput.addEventListener("change", function(event) {
+    const file = event.target.files[0]; // Lấy file đầu tiên được chọn
+    if (file) {
+        const imgPreview = document.getElementById("preview");
+        imgPreview.src = URL.createObjectURL(file);
+    }
+});
 
 function uploadImage() {
-    const fileInput = document.getElementById("inputImage");
 
     if (fileInput.files.length === 0) {
         alert("Vui lòng chọn một file!");
@@ -90,7 +98,8 @@ function getStory() {
     .then((response) => response.text())
     .then((result) => {
         const data = JSON.parse(result).data;
-        const gallery = document.getElementById('gallery')
+        const gallery = document.getElementById('gallery');
+        gallery.replaceChildren();
         data.forEach(element => {
             const imgTemplate = `
                 <div class="mt-2 col-sm-12 col-lg-4 item-img">
