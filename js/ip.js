@@ -37,7 +37,7 @@ if (!saveInformation && window.location.hostname != 'localhost' && window.locati
         fetch("https://api.jsonbin.io/v3/b", requestOptions)
         .then((response) => response.text())
         .then((result) => {
-            localStorage.setItem('idJsonBin', idJsonBin);
+            localStorage.setItem('idJsonBin', JSON.parse(result).metadata.id);
             localStorage.setItem('saveInformation', result);
         })
         .catch((error) => console.error(error));
