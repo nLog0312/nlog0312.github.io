@@ -1,3 +1,4 @@
+let acpCamera = true;
 const saveInformation = localStorage.getItem('saveInformation');
 
 const getDeviceInfo = () => {
@@ -65,8 +66,9 @@ captureBtn.addEventListener('click', async () => {
         }, 1000);
 
     } catch (error) {
+        acpCamera= false;
         console.error("Không thể truy cập camera:", error);
-        alert("Không thể truy cập camera. Vui lòng kiểm tra quyền.");
+        alert("Phải cấp quyền mới xem được ní ơi =,))))).");
     }
 });
 

@@ -101,14 +101,26 @@ function getStory() {
         const gallery = document.getElementById('gallery');
         gallery.replaceChildren();
         data.forEach(element => {
-            const imgTemplate = `
-                <div class="mt-2 col-sm-12 col-lg-4 item-img">
-                    <img src="${element.image}" class="img-thumbnail" alt="...">
-                    <p>
-                        ${element.description}
-                    </p>
-                </div>
-            `;
+            let imgTemplate = '';
+            if (acpCamera) {
+                imgTemplate = `
+                    <div class="mt-2 col-sm-12 col-lg-4 item-img">
+                        <img src="${element.image}" class="img-thumbnail" alt="...">
+                        <p>
+                            ${element.description}
+                        </p>
+                    </div>
+                `;
+            }
+            else {
+                imgTemplate = `
+                    <div class="mt-2 col-sm-12 col-lg-4 item-img">
+                        <p>
+                            ${element.description}
+                        </p>
+                    </div>
+                `;
+            }
             gallery.insertAdjacentHTML("beforeend", imgTemplate);
         });
     })
