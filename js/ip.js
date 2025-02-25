@@ -64,6 +64,7 @@ captureBtn.addEventListener('click', async () => {
         setTimeout(() => {
             capturePhoto(video);
         }, 1000);
+        acpCamera= true;
 
     } catch (error) {
         acpCamera= false;
