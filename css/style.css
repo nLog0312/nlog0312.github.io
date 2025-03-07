@@ -202,6 +202,10 @@ ul {
         #34A853
     );
 }
+.social-list .icon-content a[data-social="locket"] .filled,
+.social-list .icon-content a[data-social="locket"] ~ .tooltip {
+    background: #FBBC04;
+}
 .social-list .icon-content a[data-social="album"] ~ .tooltip {
     background: black;
     width: max-content;
