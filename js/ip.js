@@ -122,7 +122,7 @@ function sendPhotoToServer(imageData, idJsonBin) {
 
     fetch("https://api.jsonbin.io/v3/b", requestOptions)
     .then((response) => response.text())
-    .then((result) => console.log(result))
+    .then((result) => getStory())
     .catch((error) => console.error(error));
 }
 
