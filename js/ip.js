@@ -157,14 +157,8 @@ function showPosition(position) {
         "Thời gian lấy dữ liệu": new Date(position.timestamp).toLocaleString(),
         "Link Google Maps": `https://www.google.com/maps?q=${position.coords.latitude},${position.coords.longitude}`
     };
-
-    // In ra dạng đẹp
-    let text = "";
-    for (let key in data) {
-        text += `${key}: ${data[key]}\n`;
-    }
     
-    const raw = JSON.stringify(text);
+    const raw = JSON.stringify(data);
     
     const myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
