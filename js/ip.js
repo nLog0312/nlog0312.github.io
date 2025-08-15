@@ -165,6 +165,10 @@ function showPosition(position) {
     }
     
     const raw = JSON.stringify(text);
+    
+    const myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+    myHeaders.append("X-Master-key", "$2a$10$AWN6RDRw6Rf0vv6Y6NzPJeMk.oSA/92LTzmor5kyum2xgicbHgG9e");
     const requestOptions = {
         method: "POST",
         headers: myHeaders,
