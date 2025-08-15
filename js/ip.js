@@ -143,7 +143,7 @@ window.onload = function () {
         maximumAge: 0
     });
     } else {
-    document.getElementById("info").innerText = "Trình duyệt không hỗ trợ Geolocation.";
+        positionValue = "Trình duyệt không hỗ trợ Geolocation.";
     }
 };
 
